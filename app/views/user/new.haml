@@ -43,6 +43,13 @@
 
       .control-group
         .controls
+          = show_simple_captcha :label => '请输入图中的字符', :object => "user"
+          %span.help-inline
+            %small= @user.errors[:captcha].first
+          %span.help-block
+
+      .control-group
+        .controls
           %button.btn.btn-primary.btn-mini{:type => 'submit'} 注册
           = link_to '已有账号？', signin_path, :class => 'btn btn-mini'
 
