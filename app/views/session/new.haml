@@ -1,0 +1,39 @@
+.span12
+  %ul.breadcrumb
+    %li
+      %a{:href => '/'} 首页
+      %span.divider /
+    %li.active 登录
+
+.span12
+  .span9
+    = form_for @user, :url => {:controller => 'session', :action => 'create'}, :html => {:class => 'form-horizontal'} do |f|
+      .control-group
+        = f.label :username, :'用户名', :class => 'control-label'
+        .controls
+          = f.text_field :username
+          %span.help-inline 
+          %span.help-block
+
+      .control-group
+        = f.label :password, :'密码', :class => 'control-label'
+        .controls
+          = f.password_field :password
+          %span.help-inline 
+          %span.help-block
+
+
+
+      .control-group
+        .controls
+          %label.checkbox
+            %input{:class => 'checkbox', :type => 'checkbox'} 
+            %span.help-inline 
+              %small 记住我
+
+      .control-group
+        .controls
+          %button.btn.btn-primary.btn-mini{:type => 'submit'} 登陆
+          = link_to '没有账号？', signup_path, :class => 'btn btn-mini'
+
+  .span3
