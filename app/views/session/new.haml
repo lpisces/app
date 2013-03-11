@@ -9,9 +9,9 @@
   .span9
     = form_for @user, :url => {:controller => 'session', :action => 'create'}, :html => {:class => 'form-horizontal'} do |f|
       .control-group
-        = f.label :username, :'用户名', :class => 'control-label'
+        = f.label :name, :'用户名', :class => 'control-label'
         .controls
-          = f.text_field :username
+          = f.text_field :name
           %span.help-inline 
           %span.help-block
 
