@@ -8,8 +8,11 @@
       %a.brand{:href => root_path}= content_for?(:site_name) ? yield(:site_name) : 'App'
       .container.nav-collapse
         %ul.nav
-          %li
-            %a{:href => '#'}= "<small>分类导航</small>".html_safe
+          - if signed_in?
+            %li
+              %a{:href => '#'}= "<small><i class='icon-list'></i>分类导航</small>".html_safe
+            %li
+              %a{:href => admin_path}= "<small><i class='icon-wrench'></i>管理后台</small>".html_safe
         %ul.nav.pull-right
           - if signed_in?
             %li

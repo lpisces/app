@@ -1,0 +1,16 @@
+!!! 5
+%html{:lang => 'en'}
+  %head
+    = render 'shared/head'
+  %body
+    = render 'shared/nav'
+    #body.container
+      = bootstrap_flash 
+      #content.row-fluid
+        = render 'shared/admin_side_nav'
+        .span10
+          = yield
+        
+      = render 'shared/footer'
+      = debug(params) if Rails.env.development? 
+    = javascript_include_tag "application"

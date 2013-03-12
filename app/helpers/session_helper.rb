@@ -26,4 +26,8 @@ module SessionHelper
     cookies.delete(:remember_token)
   end
 
+  def auth
+    redirect_to :signin if !signed_in?
+  end
+
 end

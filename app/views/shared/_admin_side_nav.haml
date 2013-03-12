@@ -1,0 +1,46 @@
+.span2.pull-right
+  %ul.nav.nav-tabs.nav-stacked
+    - if self.controller_name.to_s == 'dashboard'
+      %li.active
+        %a{:href => admin_path} 
+          %i.icon-home
+          %small 管理后台
+    - else 
+      %li
+        %a{:href => admin_path} 
+          %i.icon-home
+          %small 管理后台
+
+    - if self.controller_name.to_s == 'user'
+      %li.active
+        %a{:href => admin_user_path}
+          %i.icon-user
+          %small 用户管理
+    - else 
+      %li
+        %a{:href => admin_user_path}
+          %i.icon-user
+          %small 用户管理
+
+    - if self.controller_name.to_s == 'category'
+      %li.active
+        %a{:href => admin_category_path}
+          %i.icon-bookmark
+          %small 分类管理
+    - else
+      %li
+        %a{:href => admin_category_path}
+          %i.icon-bookmark
+          %small 分类管理
+
+    - if self.controller_name.to_s == 'setting'
+      %li.active
+        %a{:href => admin_setting_path}
+          %i.icon-wrench
+          %small 系统设置
+    - else
+      %li
+        %a{:href => admin_setting_path}
+          %i.icon-wrench
+          %small 系统设置
+

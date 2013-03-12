@@ -1,4 +1,6 @@
 App::Application.routes.draw do
+  get "setting/index"
+
   root :to => 'home#index'
 
   match 'signin' => 'session#new'
@@ -7,6 +9,12 @@ App::Application.routes.draw do
 
   match 'auth' => 'session#create'
   match 'user/create' => 'user#create'
+  
+  match 'admin' => 'admin/dashboard#index'
+  match 'admin/user' => 'admin/user#index'
+  match 'admin/category' => 'admin/category#index'
+  match 'admin/setting' => 'admin/setting#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

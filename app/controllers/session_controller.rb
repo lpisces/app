@@ -1,8 +1,10 @@
 # encoding : utf-8
 class SessionController < ApplicationController
   include SessionHelper
+  before_filter :auth, :only => [:destroy]
 
   def new
+    redirect_to :root if signed_in?
     @user = User.new
   end
 
