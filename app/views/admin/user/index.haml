@@ -1,0 +1,20 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th ID
+      %th 用户名
+      %th Email
+      %th{:style => 'width:200px;'} Ops
+  %tbody
+    - @users.each do |u|
+      %tr
+        %td
+          %small= u.id
+        %td
+          %small= u.name
+        %td
+          %small= u.email
+        %td
+          %a.btn.btn-mini.btn-danger{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'disabled'} 禁用
+          %a.btn.btn-mini.btn-danger{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'admin'} 设为管理员
+ 

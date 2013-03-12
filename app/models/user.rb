@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   before_save {|user| user.email = email.downcase}
   before_save :create_remember_token
 
+  self.per_page = 20
+
   # validations
   validates :name, :uniqueness => {:message => '用户名已经存在'}, :presence => { :message => '请填写用户名'}, :length => {:to_long => "用户名不能超过%{count}个字符", :maximum => 64,  :minimum   => 4, :too_short => "用户名太短了喔"}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
