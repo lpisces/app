@@ -9,9 +9,15 @@
       .container.nav-collapse
         %ul.nav
           %li
-            %a{:href => '#'} 所有分类
+            %a{:href => '#'}= "<small>分类导航</small>".html_safe
         %ul.nav.pull-right
-          %li
-            %a{:href => signin_path} 登录
-          %li
-            %a{:href => signup_path} 注册
+          - if signed_in?
+            %li
+              %a{:href => '#'}= "<i class='icon-user'></i>#{current_user.name}".html_safe
+            %li
+              %a{:href => signout_path}= "<i class='icon-hand-right'></i><small>退出</small>".html_safe
+          - else 
+            %li
+              %a{:href => signin_path}= "<i class='icon-chevron-right'></i><small>登录</small>".html_safe 
+            %li
+              %a{:href => signup_path}= "<i class='icon-plus-sign'></i><small>注册</small>".html_safe

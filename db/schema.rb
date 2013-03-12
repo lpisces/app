@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311064959) do
+ActiveRecord::Schema.define(:version => 20130312044402) do
 
   create_table "simple_captcha_data", :force => true do |t|
     t.string   "key",        :limit => 40
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130311064959) do
     t.string   "email"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "remember_token"
   end
 
 end

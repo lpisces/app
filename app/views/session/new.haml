@@ -18,22 +18,20 @@
       .control-group
         = f.label :password, :'密码', :class => 'control-label'
         .controls
-          = f.password_field :password
+          = f.password_field :password, :autocomplete => 'off'
           %span.help-inline 
           %span.help-block
-
-
 
       .control-group
         .controls
           %label.checkbox
-            %input{:class => 'checkbox', :type => 'checkbox'} 
+            %input{:class => 'checkbox', :type => 'checkbox', :name => 'remeber_me'} 
             %span.help-inline 
               %small 记住我
 
       .control-group
         .controls
-          %button.btn.btn-primary.btn-mini{:type => 'submit'} 登陆
+          %button.btn.btn-primary.btn-mini{:type => 'submit'} 登录
           = link_to '没有账号？', signup_path, :class => 'btn btn-mini'
 
   .span3
