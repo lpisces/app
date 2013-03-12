@@ -1,3 +1,4 @@
+# encoding : utf-8
 module SessionHelper
 
   def sign_in(user, remeber_me = false)
@@ -28,6 +29,18 @@ module SessionHelper
 
   def auth
     redirect_to :signin if !signed_in?
+  end
+
+  def require_signed_in
+    redirect_to :signin if !signed_in?
+  end
+
+  def admin?
+    !current_user.nil? && current_user.is_admin
+  end
+
+  def require_admin
+    head :forbidden if !admin?
   end
 
 end

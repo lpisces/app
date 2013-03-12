@@ -1,4 +1,4 @@
-%table.table.table-bordered
+%table#admin_user.table.table-bordered
   %thead
     %tr
       %th ID
@@ -15,6 +15,9 @@
         %td
           %small= u.email
         %td
-          %a.btn.btn-mini.btn-danger{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'disabled'} 禁用
-          %a.btn.btn-mini.btn-danger{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'admin'} 设为管理员
- 
+          - unless u.is_admin
+            %a.btn.btn-mini.btn.op{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'set_admin'} 设为管理员
+          - else
+            %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'unset_admin'} 取消管理员
+
+.pull-right= will_paginate @users

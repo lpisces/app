@@ -12,6 +12,7 @@ App::Application.routes.draw do
   
   match 'admin' => 'admin/dashboard#index'
   match 'admin/user' => 'admin/user#index'
+  match 'admin/user_op' => 'admin/user#op'
   match 'admin/category' => 'admin/category#index'
   match 'admin/setting' => 'admin/setting#index'
 

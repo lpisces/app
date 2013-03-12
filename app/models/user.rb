@@ -1,7 +1,7 @@
 # encoding : utf-8
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :captcha, :captcha_key
+  attr_accessible :name, :email, :password, :password_confirmation, :captcha, :captcha_key, :is_admin
   attr_reader :password
 
   apply_simple_captcha :message => "验证码不正确"
