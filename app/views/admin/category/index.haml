@@ -1,0 +1,28 @@
+%table.admin_category.table.table-bordered
+  %thead
+    %tr
+      %th 
+        %small ID
+      %th{:style => 'width:200px;'}
+        %small 分类名
+      %th
+        %small 子类名
+      %th{:style => 'width:200px;'} 
+        %small Ops
+  %tbody
+    - @categories.each do |c|
+      %tr
+        %td
+          %small= c.id
+        %td
+          %small= c.name
+        %td
+          - sub = Category.where(:parent_id => c.id).all
+          %ul.inline
+            - sub.each do |s|
+              %li 
+                %small= s.name
+        %td
+          %a.btn.btn-mini.btn-primary{:href => "/admin/category/sub/#{c.id}"} 管理
+          %a.btn.btn-mini{:href => "/admin/category/new/?parent_id=#{c.id}"} 添加
+

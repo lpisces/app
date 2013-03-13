@@ -1,0 +1,24 @@
+.span12
+  %a.pull-right.btn.btn-success.btn-mini{:href => "/admin/category/new?parent_id=#{params[:id]}"} 新增
+%table.admin_category_sub.table.table-bordered
+  %thead
+    %tr
+      %th 
+        %small ID
+      %th{:style => 'width:200px;'}
+        %small 分类名
+      %th
+        %small 是否父分类
+      %th{:style => 'width:200px;'} 
+        %small Ops
+  %tbody
+    - @categories.each do |c|
+      %tr
+        %td
+          %small= c.id
+        %td
+          %small= c.name
+        %td
+          %small= c.is_parent ? '是' : '否'
+        %td
+          %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => c.id, :'data-op' => 'delete'} 删除

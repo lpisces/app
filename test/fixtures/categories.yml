@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  parent_id: 1
+  level: 1
+  is_parent: false
+
+two:
+  name: MyString
+  parent_id: 1
+  level: 1
+  is_parent: false

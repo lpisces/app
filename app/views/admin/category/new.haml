@@ -1,0 +1,50 @@
+.span12
+  %ul.breadcrumb
+    %li
+      %a{:href => admin_path} 管理后台
+      %span.divider /
+    %li
+      %a{:href => admin_category_path} 分类管理
+      %span.divider /
+    %li.active 新建分类
+
+.span12
+  .span9
+    = form_for @category, :url => {:controller => 'admin/category', :action => 'create'}, :html => {:class => 'form-horizontal', :id => 'new_category_form'} do |f|
+      .control-group
+        = f.label :name, :'分类名称', :class => 'control-label'
+        .controls
+          = f.text_field :name, :value => @category.name
+          %span.help-inline
+            %small= @category.errors[:name].first
+          %span.help-block
+
+      .control-group
+        = f.label :parent_id, :'父分类ID', :class => 'control-label'
+        .controls
+          = f.text_field :parent_id, :autocomplete => 'off', :value => params[:parent_id] || @category.parent_id
+          %span.help-inline
+            %small= @category.errors[:value].first
+          %span.help-block
+
+      .control-group
+        = f.label :level, :'分类级别',:class => 'control-label'
+        .controls
+          = f.text_field :level, :autocomplete => 'off', :value => (@parent_category.level + 1)
+          %span.help-inline
+            %small= @category.errors[:level].first
+          %span.help-block
+
+      .control-group
+        = f.label :is_parent, :'是否父类',:class => 'control-label'
+        .controls
+          = f.text_field :is_parent, :autocomplete => 'off', :value => @category.is_parent
+          %span.help-inline
+            %small= @category.errors[:is_parent].first
+          %span.help-block
+
+
+      .control-group
+        .controls
+          %button.btn.btn-primary.btn-mini{:type => 'submit'} 创建
+          %a.btn.btn-mini{:href => admin_category_path} 回到列表
