@@ -1,10 +1,14 @@
 %table#admin_user.table.table-bordered
   %thead
     %tr
-      %th ID
-      %th 用户名
-      %th Email
-      %th{:style => 'width:200px;'} Ops
+      %th 
+        %small ID
+      %th
+        %small 用户名
+      %th
+        %small Email
+      %th{:style => 'width:200px;'} 
+        %small Ops
   %tbody
     - @users.each do |u|
       %tr

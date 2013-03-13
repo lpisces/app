@@ -1,0 +1,42 @@
+.span12
+  %ul.breadcrumb
+    %li
+      %a{:href => admin_path} 管理后台
+      %span.divider /
+    %li
+      %a{:href => admin_setting_path} 系统设置
+      %span.divider /
+    %li.active 新建设置
+
+.span12
+  .span9
+    = form_for @setting, :url => {:controller => 'admin/setting', :action => 'create'}, :html => {:class => 'form-horizontal', :id => 'new_setting_form'} do |f|
+      .control-group
+        = f.label :key, :'键名', :class => 'control-label'
+        .controls
+          = f.text_field :key, :value => @setting.key
+          %span.help-inline
+            %small= @setting.errors[:key].first
+          %span.help-block
+
+      .control-group
+        = f.label :value, :'键值', :class => 'control-label'
+        .controls
+          = f.text_field :value, :autocomplete => 'off', :value => @setting.value
+          %span.help-inline
+            %small= @setting.errors[:value].first
+          %span.help-block
+
+      .control-group
+        = f.label :namespace, :'命名空间', :class => 'control-label'
+        .controls
+          = f.text_field :namespace, :autocomplete => 'off', :value => @setting.value
+          %span.help-inline
+            %small= @setting.errors[:namespace].first
+          %span.help-block
+
+
+      .control-group
+        .controls
+          %button.btn.btn-primary.btn-mini{:type => 'submit'} 创建
+          %a.btn.btn-mini{:href => admin_setting_path} 回到列表

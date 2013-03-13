@@ -1,2 +1,29 @@
-<h1>Admin::Setting#index</h1>
-<p>Find me in app/views/admin/setting/index.html.erb</p>
+%a.pull-right.btn.btn-mini.btn-success{:href => admin_setting_new_path} 新建配置
+%br/
+%table#admin_setting.table.table-bordered
+  %thead
+    %tr
+      %th
+        %small ID
+      %th 
+        %small 键名
+      %th
+        %small 键值
+      %th
+        %small 命名空间
+      %th{:style => 'width:200px;'} Ops
+  %tbody
+    - @settings.each do |s|
+      %tr
+        %td
+          %small= s.id
+        %td
+          %small= s.key
+        %td
+          %small= s.value
+        %td
+          %small= s.namespace
+        %td
+          %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => s.id, :'data-op' => 'delete'} 删除
+
+.pull-right= will_paginate @settings

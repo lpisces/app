@@ -15,6 +15,9 @@ App::Application.routes.draw do
   match 'admin/user_op' => 'admin/user#op'
   match 'admin/category' => 'admin/category#index'
   match 'admin/setting' => 'admin/setting#index'
+  match 'admin/setting/new' => 'admin/setting#new'
+  match 'admin/setting/create'
+  match 'admin/setting_op' => 'admin/setting#op'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

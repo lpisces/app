@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312131801) do
+ActiveRecord::Schema.define(:version => 20130313011428) do
+
+  create_table "settings", :force => true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "namespace",  :default => "global"
+  end
 
   create_table "simple_captcha_data", :force => true do |t|
     t.string   "key",        :limit => 40
@@ -21,6 +29,16 @@ ActiveRecord::Schema.define(:version => 20130312131801) do
   end
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
+
+  create_table "taobao_categories", :force => true do |t|
+    t.integer  "cid"
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "parent_cid"
+    t.boolean  "is_parent"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
