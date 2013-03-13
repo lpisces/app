@@ -23,6 +23,10 @@
               %li 
                 %small= s.name
         %td
-          %a.btn.btn-mini.btn-primary{:href => "/admin/category/sub/#{c.id}"} 管理
-          %a.btn.btn-mini{:href => "/admin/category/new/?parent_id=#{c.id}"} 添加
+          %a.btn.btn-mini.btn-primary{:href => "/admin/category/sub/#{c.id}"}
+            %i.icon-wrench
+            管理
+          %a.btn.btn-mini{:href => "/admin/category/new/?parent_id=#{c.id}"}
+            %i.icon-plus
+            添加
 

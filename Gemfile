@@ -39,6 +39,8 @@ gem "galetahub-simple_captcha", :require => "simple_captcha"
 #pagination
 gem 'will_paginate', '~> 3.0'
 
+gem 'whenever', :require => false
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

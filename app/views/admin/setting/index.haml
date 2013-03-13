@@ -1,5 +1,7 @@
 .span12
-  %a.pull-right.btn.btn-mini.btn-success{:href => admin_setting_new_path} 新建配置
+  %a.pull-right.btn.btn-mini.btn-success{:href => admin_setting_new_path}
+    %i.icon-plus
+    新建配置
 %table#admin_setting.table.table-bordered
   %thead
     %tr
@@ -24,6 +26,8 @@
         %td
           %small= s.namespace
         %td
-          %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => s.id, :'data-op' => 'delete'} 删除
+          %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => s.id, :'data-op' => 'delete'}
+            %i.icon-remove
+            删除
 
 .pull-right= will_paginate @settings

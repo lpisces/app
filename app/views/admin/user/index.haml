@@ -20,8 +20,12 @@
           %small= u.email
         %td
           - unless u.is_admin
-            %a.btn.btn-mini.btn.op{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'set_admin'} 设为管理员
+            %a.btn.btn-mini.btn.op{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'set_admin'}
+              %i.icon-user
+              设为管理员
           - else
-            %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'unset_admin'} 取消管理员
+            %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => u.id, :'data-op' => 'unset_admin'}
+              %i.icon-user
+              取消管理员
 
 .pull-right= will_paginate @users

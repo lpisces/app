@@ -1,5 +1,7 @@
 .span12
-  %a.pull-right.btn.btn-success.btn-mini{:href => "/admin/category/new?parent_id=#{params[:id]}"} 新增
+  %a.pull-right.btn.btn-success.btn-mini{:href => "/admin/category/new?parent_id=#{params[:id]}"} 
+    %i.icon-plus
+    新增
 %table.admin_category_sub.table.table-bordered
   %thead
     %tr
@@ -21,4 +23,6 @@
         %td
           %small= c.is_parent ? '是' : '否'
         %td
-          %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => c.id, :'data-op' => 'delete'} 删除
+          %a.btn.btn-mini.btn-danger.op{:href => 'javascript:void(0)', :'data-id' => c.id, :'data-op' => 'delete'}
+            %i.icon-remove
+            删除
