@@ -30,7 +30,7 @@
       .control-group
         = f.label :level, :'分类级别',:class => 'control-label'
         .controls
-          = f.text_field :level, :autocomplete => 'off', :value => (@parent_category.level + 1)
+          = f.text_field :level, :autocomplete => 'off', :value => (@parent_category.nil? ? '1' : (@parent_category.level + 1))
           %span.help-inline
             %small= @category.errors[:level].first
           %span.help-block
