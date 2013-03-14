@@ -1,4 +1,8 @@
 App::Application.routes.draw do
+  get "go/product"
+
+  get "go/category"
+
   get "product/index"
 
   get "setting/index"
@@ -27,6 +31,9 @@ App::Application.routes.draw do
   match 'admin/category/op' => 'admin/category#op'
   match 'admin/product' => 'admin/product#index'
   match 'admin/product/index' => 'admin/product#index'
+
+  match 'go/product/:id' => 'go#product'
+  match 'go/category/:id' => 'go#category'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
