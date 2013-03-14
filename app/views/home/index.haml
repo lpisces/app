@@ -36,11 +36,11 @@
   %ul.nav.nav-tabs.nav-stacked
     - @categories.each do |c|
       %li
-        %a{:href => "##{c.name}"}= c.name
+        %a{:href => "##{c.name}"}= "<i class='icon-bookmark'></i>#{c.name}".html_safe
 
 - @categories.each do |c|
   .span10
-    %ul.nav.nav-pills
+    %ul.nav.nav-tabs
       %li.active
         %a{:name => "#{c.name}"}= c.name
       - sub = Category.where(:parent_id => c.id).limit(5)
@@ -49,7 +49,7 @@
         - ids << s.id;
         %li
           %a{:href => '#'}= s.name
-      %a.pull-left{:href => '#', :style => 'line-height:30px;'}
+      %a.pull-left{:href => '#', :style => 'line-height:35px;'}
         %span.label.label-success 更多
   .span12
     %ul.thumbnails
