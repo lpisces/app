@@ -1,0 +1,56 @@
+%span.label 查询条件
+.search{:style => 'border:1px solid #eee;padding:20px 0px 0px 0px;'}
+  = search_form_for @search, :html => {:class => 'form-horizontal'}, :url => '/admin/product/index' do |f|
+    .control-group
+      %label.control-label{:for => 'q_category_id_eq', :style => 'width:100px'} 分类ID
+      .controls{:style => 'margin-left:120px;'}
+        = f.text_field :category_id_eq
+              
+    .control-group
+      %label.control-label{:for => 'q_title_cout', :style => 'width:100px'} 标题包含
+      .controls{:style => 'margin-left:120px;'}
+        = f.text_field :title_cont
+    .control-group
+      .controls{:style => 'margin-left:120px;'}
+        %button.btn.btn-mini.btn-success{:type => 'submit'} 查找
+.pull-right= will_paginate @products, :renderer => BootstrapPagination::Rails
+%table#admin_product.table.table-bordered
+  %thead
+    %tr
+      %th 
+        %small ID
+      %th 
+        %small 图片
+      %th
+        %small 标题
+      %th{:style => 'width:45px;'}
+        %small= sort_link @search, :price, '价格'
+      %th{:style => 'width:45px;'}
+        %small= sort_link @search, :coupon_price, '折价'
+      %th{:style => 'width:45px;'}
+        %small= sort_link @search, :commission, '佣金'
+      %th{:style => 'width:45px;'}
+        %small= sort_link @search, :volume, '销量'
+      %th{:style => 'width:200px;'} 
+        %small Ops
+  %tbody
+    - @products.each do |p|
+      %tr
+        %td
+          %small= p.id
+        %td
+          %img{:src => "#{p.pic_url}_130x130.jpg"}
+        %td
+          %small
+            %a{:href => p.click_url, :target => '_blank'}= p.title
+        %td
+          %small= p.price
+        %td
+          %small= p.coupon_price
+        %td
+          %small= p.commission
+        %td
+          %small= p.volume
+        %td
+
+.pull-right= will_paginate @products, :renderer => BootstrapPagination::Rails

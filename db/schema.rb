@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313063731) do
+ActiveRecord::Schema.define(:version => 20130314063153) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,31 @@ ActiveRecord::Schema.define(:version => 20130313063731) do
     t.string   "path"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "title"
+    t.decimal  "price",             :precision => 8, :scale => 3
+    t.decimal  "coupon_price",      :precision => 8, :scale => 3
+    t.text     "click_url"
+    t.text     "shop_click_url"
+    t.text     "pic_url"
+    t.datetime "coupon_start_time"
+    t.datetime "coupon_end_time"
+    t.decimal  "coupon_rate",       :precision => 8, :scale => 3
+    t.decimal  "commission_rate",   :precision => 8, :scale => 3
+    t.decimal  "commission",        :precision => 8, :scale => 3
+    t.integer  "commission_num"
+    t.integer  "volume"
+    t.string   "num_iid"
+    t.string   "nick"
+    t.decimal  "commission_volume", :precision => 8, :scale => 3
+    t.integer  "category_id"
+    t.text     "json"
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
+    t.integer  "sort",                                            :default => 0
+    t.boolean  "enabled",                                         :default => true
   end
 
   create_table "settings", :force => true do |t|

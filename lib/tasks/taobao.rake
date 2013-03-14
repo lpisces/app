@@ -10,8 +10,10 @@ require 'active_support/core_ext/string/encoding'
 #require 'action_view/helpers/capture_helper'
 #require 'action_view/helpers/sanitize_helper'
 #include ActionView::Helpers::SanitizeHelper
+include ActionView::Helpers::SanitizeHelper
 
 namespace :taobao do
+
 
   task :cid => :environment do
     parent_cid = Setting.g 'root_cid', 'taobao'
@@ -36,6 +38,63 @@ namespace :taobao do
         end
       end
     end
+  end
+
+  task :product => :environment do
+    app_key = Setting.g 'app_key', 'taobao'
+    app_secret = Setting.g 'app_secret', 'taobao'
+    categories = Category.where(:level => 2).all
+    categories.each do |c|
+      next if TaobaoCategory.where(:cid => c.id).first.nil?
+      params = product_params app_key, app_secret, c.id
+      json = get(url(params))
+      products = ActiveSupport::JSON.decode(json)
+      next if products.nil? || products['taobaoke_items_coupon_get_response'].nil? || products['taobaoke_items_coupon_get_response']['taobaoke_items'].nil?
+      items = products['taobaoke_items_coupon_get_response']['taobaoke_items']['taobaoke_item']
+      next unless items.respond_to? :each
+      items.each do |p|
+        save_product p, c.id, Product
+      end
+    end
+  end
+
+  def save_product(p, category_id, m)
+    info = {}
+    info['title'] = strip_tags(p['title'])
+    info['price'] = p['price'].to_f
+    info['coupon_price'] = p['coupon_price'].to_f
+    info['coupon_rate'] = p['coupon_rate'].to_f
+    info['click_url'] = p['click_url']
+    info['commission'] = p['commission'].to_f
+    info['commission_num'] = p['commission_num'].to_f
+    info['commission_rate'] = p['commission_rate'].to_f
+    info['pic_url'] = p['pic_url']
+    info['coupon_start_time'] = p['coupon_start_time']
+    info['coupon_end_time'] = p['coupon_end_time']
+    info['volume'] = p['volume']
+    info['category_id'] = category_id
+    info['json'] = ActiveSupport::JSON.encode(p)
+    product = m.where(:title => info['title']).first_or_create(info)
+    product.update_attributes(info)
+  end
+
+  def product_params(app_key, app_secret, cid)
+    params = {}
+    params[:format] = 'json'
+    params[:timestamp] = (Time.now).strftime("%Y-%m-%d %H:%M:%S")
+    params[:sign_method] = 'md5'
+    params[:v] = '2.0'
+    params[:method] = 'taobao.taobaoke.items.coupon.get'
+    params[:fields] = ['num_iid', 'seller_id', 'nick', 'title', 'price', 'item_location', 'seller_credit_score', 'click_url', 'shop_click_url', 'pic_url', 'taobaoke_cat_click_url', 'keyword_click_url', 'coupon_rate', 'coupon_price', 'coupon_start_time', 'coupon_end_time', 'commission_rate', 'commission', 'commission_num', 'commission_volume', 'volume', 'shop_type'].join ','
+    params[:cid] = cid
+    params[:keyword] = ''
+    params[:sort] = 'volume_desc'
+    params[:app_key] = app_key
+    params[:page_no] = 1
+    params[:page_size] = 100
+    params[:shop_type] = 'b'
+    params[:sign] = sign(app_secret, params)
+    params
   end
 
   def save_cid(m, v, level)

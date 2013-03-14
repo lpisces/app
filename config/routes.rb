@@ -1,4 +1,6 @@
 App::Application.routes.draw do
+  get "product/index"
+
   get "setting/index"
 
   root :to => 'home#index'
@@ -23,6 +25,8 @@ App::Application.routes.draw do
   match 'admin/category/new' => 'admin/category#new'
   match 'admin/category/create' => 'admin/category#create'
   match 'admin/category/op' => 'admin/category#op'
+  match 'admin/product' => 'admin/product#index'
+  match 'admin/product/index' => 'admin/product#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
