@@ -43,7 +43,7 @@ namespace :taobao do
   task :product => :environment do
     app_key = Setting.g 'app_key', 'taobao'
     app_secret = Setting.g 'app_secret', 'taobao'
-    categories = Category.where(:level => 2).all
+    categories = Category.where("level = ? or id = ?", 2, 50008055).all
     categories.each do |c|
       next if TaobaoCategory.where(:cid => c.id).first.nil?
       params = product_params app_key, app_secret, c.id
