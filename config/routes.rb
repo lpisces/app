@@ -1,4 +1,6 @@
 App::Application.routes.draw do
+  get "category/map"
+
   get "go/product"
 
   get "go/category"
@@ -34,6 +36,7 @@ App::Application.routes.draw do
 
   match 'go/product/:id' => 'go#product'
   match 'go/category/:id' => 'go#category'
+  match 'category/map' => 'category#map'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
