@@ -1,0 +1,16 @@
+%a{:style => 'border:none', :href => @top.click_url}
+  %img.img-rounded{:alt => @top.title, :src => @top.pic_url, :style => 'width:450px;height:450px;'}
+%small.pull-right{:style => 'margin:0 15px;width:200px;'}
+  %a{:href => @top.click_url, :target => '_blank'}= @top.title
+
+%h4.pull-left{:style => 'color:red;padding-left:10px;'}= "&yen;#{@top.coupon_price}&nbsp;".html_safe
+%h4.pull-left{:style => 'color:#333;text-decoration:line-through;'}= "&yen;#{@top.price} ".html_safe
+%h4.pull-right
+  %a{:href => "/go/shop/#{@top.id}", :target => '_blank'}
+    %i.icon-home
+%h4.pull-right
+  %a{:href => 'javascript:void(0)', :style => 'color:orangered;'}
+    %i.icon-star-empty
+%h4.pull-right
+  %a{:href => "/go/product/#{@top.id}", :style => 'color:#46a546', :target => '_blank'}
+    %i.icon-shopping-cart

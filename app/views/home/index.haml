@@ -1,44 +1,17 @@
-
-
 .span12
   .span10{:style => 'margin-top:-20px;'}
     %ul.thumbnails
       %li{:style => 'width:450px;margin:0 15px;padding:5px;display:block;'}
-        %a{:style => 'border:none', :href => @top.click_url}
-          %img.img-rounded{:alt => @top.title, :src => @top.pic_url, :style => 'width:450px;height:450px;'}
-        %small.pull-right{:style => 'margin:0 15px;width:200px;'}
-          %a{:href => @top.click_url, :target => '_blank'}= @top.title
-        %a.love.pull-left{:style => 'color:red;font-size:30px;text-decoration:none;', :href => 'javascript:void(0)'}
-          %i.icon-heart{:style => 'margin:0 15px;'}
-        %h4.pull-left{:style => 'color:red;padding-right:3px;'}= "￥ #{@top.coupon_price}"
-        %h4.pull-left{:style => 'color:#333;text-decoration:line-through;'}= "￥ #{@top.price} "
-        .clearfix
-        %a.btn.btn-mini.pull-left{:style => 'margin:0 15px;', :href => 'javascript:void(0)'} 收藏
-      - @sub.each do |s|
-        %li{:style => 'width:195px;margin:0 15px;padding:5px;display:block;'}
-          %a{:style => 'border:none;width:195px;', :href => "/go/product/#{s.id}"}
-            %img.img-rounded{:src => "#{s.pic_url}", :alt => "#{s.title}", :style => 'width:195px;height:195px;'}
-          %small.pull-right{:style => 'margin:5px 0 0 25px;width:195px;'}
-            %a{:href => "/go/product/#{s.id}", :target => '_blank'}= s.title
-          %h6.pull-left{:style => 'color:red;padding-right:3px;'}= "￥#{s.coupon_price}"
-          %h6.pull-left{:style => 'color:#333;text-decoration:line-through;'}= "￥#{s.price} "
-          %h4.pull-right
-            %a{:href => 'javascript:void(0)'}
-              %i.icon-home
-          %h4.pull-right
-            %a{:href => 'javascript:void(0)', :style => 'color:orangered;'}
-              %i.icon-star-empty
-          %h4.pull-right
-            %a{:href => 'javascript:void(0)', :style => 'color:#46a546'}
-              %i.icon-shopping-cart
-            
+        %span.label.label-success 热销
+        = render :partial => 'top'
+      = render :partial => 'sub'
   
   .span2
     %span.label.label-info 美食分类
     %ul.nav.nav-tabs.nav-stacked
       - @categories.each do |c|
         %li
-          %a{:href => "##{c.name}"}= "<i class='icon-bookmark'></i>#{c.name}".html_safe
+          %a{:href => "/category/#{c.id}"}= "<i class='icon-bookmark'></i>#{c.name}".html_safe
 
 - @categories.each do |c|
   = render :partial => 'category', :locals => {:c => c}

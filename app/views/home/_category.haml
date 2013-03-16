@@ -1,4 +1,3 @@
-
 .span10
   %ul.nav.nav-tabs
     %li.active
@@ -8,14 +7,14 @@
     - sub.each do |s|
       - ids << s.id;
       %li
-        %a{:href => '#'}= s.name
-    %a.pull-left{:href => '#', :style => 'line-height:35px;'}
+        %a{:href => "category/#{s.id}"}= s.name
+    %a.pull-left{:href => "/category/#{c.id}", :style => 'line-height:35px;'}
       %span.label.label-success 更多
-.span12
+.span12{:style => 'margin:20px 0 0 0 ;'}
   %ul.thumbnails
-    - products = Product.where('category_id in (?)', ids).limit(12).order('volume desc')
+    - products = Product.where('coupon_end_time > ?', Date.today).where('category_id in (?)', ids).limit(15).order('volume desc')
     - products.each do |p|
-      %li{:style => 'width:195px;margin:0 15px;padding:5px;display:block;'}
+      %li{:style => 'width:195px;height:310px;margin:0 5px;padding:5px;display:block;'}
         %a{:target => '_blank', :style => 'border:none;width:195px;', :href => "/go/product/#{p.id}"}
           %img.img-rounded.lazy{:'src' => '', :'data-original' => "#{p.pic_url}_220x220.jpg", :alt => "#{p.title}", :style => 'width:195px;height:195px;'}
         %small.pull-right{:style => 'margin:5px 0 0 25px;width:195px;'}
@@ -23,12 +22,11 @@
         %h6.pull-left{:style => 'color:red;padding-right:3px;'}= "￥#{p.coupon_price}"
         %h6.pull-left{:style => 'color:#333;text-decoration:line-through;'}= "￥#{p.price} "
         %h4.pull-right
-          %a{:href => 'javascript:void(0)'}
+          %a{:href => "/go/product/#{p.id}", :target => '_blank'}
             %i.icon-home
         %h4.pull-right
           %a{:href => 'javascript:void(0)', :style => 'color:orangered;'}
             %i.icon-star-empty
         %h4.pull-right
-          %a{:href => 'javascript:void(0)', :style => 'color:#46a546'}
+          %a{:href => "/go/product/#{p.id}", :style => 'color:#46a546'}
             %i.icon-shopping-cart
-

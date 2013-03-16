@@ -65,6 +65,7 @@ namespace :taobao do
     info['coupon_price'] = p['coupon_price'].to_f
     info['coupon_rate'] = p['coupon_rate'].to_f
     info['click_url'] = p['click_url']
+    info['shop_click_url'] = p['shop_click_url']
     info['commission'] = p['commission'].to_f
     info['commission_num'] = p['commission_num'].to_f
     info['commission_rate'] = p['commission_rate'].to_f
