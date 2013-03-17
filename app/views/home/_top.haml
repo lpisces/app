@@ -1,6 +1,7 @@
 %a{:style => 'border:none', :href => @top.click_url}
   %img.img-rounded{:alt => @top.title, :src => @top.pic_url, :style => 'width:450px;height:450px;'}
 %small.pull-right{:style => 'margin:0 15px;width:200px;'}
+  %span.badge.badge-important 1
   %a{:href => @top.click_url, :target => '_blank'}= @top.title
 
 %h4.pull-left{:style => 'color:red;padding-left:10px;'}= "&yen;#{@top.coupon_price}&nbsp;".html_safe

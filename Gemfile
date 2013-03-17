@@ -26,6 +26,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'fancybox-rails'
 
 gem 'thin'
 gem 'haml'

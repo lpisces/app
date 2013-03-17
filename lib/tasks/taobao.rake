@@ -53,6 +53,15 @@ namespace :taobao do
       items = products['taobaoke_items_coupon_get_response']['taobaoke_items']['taobaoke_item']
       next unless items.respond_to? :each
       items.each do |p|
+        img_json = get(url(img_params app_key, app_secret, p['num_iid']))
+        imgs =  ActiveSupport::JSON.decode(img_json)
+        imgs = imgs['items_list_get_response']['items']['item']
+        unless imgs[0]['item_imgs'].empty?
+          p['imgs'] = []
+          imgs[0]['item_imgs']["item_img"].each do |i|
+            p['imgs'] << i['url']
+          end
+        end
         save_product p, c.id, Product
       end
     end
@@ -75,8 +84,23 @@ namespace :taobao do
     info['volume'] = p['volume']
     info['category_id'] = category_id
     info['json'] = ActiveSupport::JSON.encode(p)
+    info['imgs'] = p['imgs'].join(',')
     product = m.where(:title => info['title']).first_or_create(info)
     product.update_attributes(info)
+  end
+
+  def img_params(app_key, app_secret, num_iid)
+    params = {}
+    params[:format] = 'json'
+    params[:timestamp] = (Time.now).strftime("%Y-%m-%d %H:%M:%S")
+    params[:sign_method] = 'md5'
+    params[:v] = '2.0'
+    params[:method] = 'taobao.items.list.get'
+    params[:fields] = ['item_img.url'].join ','
+    params[:num_iids] = num_iid
+    params[:app_key] = app_key
+    params[:sign] = sign(app_secret, params)
+    params
   end
 
   def product_params(app_key, app_secret, cid)
@@ -86,7 +110,7 @@ namespace :taobao do
     params[:sign_method] = 'md5'
     params[:v] = '2.0'
     params[:method] = 'taobao.taobaoke.items.coupon.get'
-    params[:fields] = ['num_iid', 'seller_id', 'nick', 'title', 'price', 'item_location', 'seller_credit_score', 'click_url', 'shop_click_url', 'pic_url', 'taobaoke_cat_click_url', 'keyword_click_url', 'coupon_rate', 'coupon_price', 'coupon_start_time', 'coupon_end_time', 'commission_rate', 'commission', 'commission_num', 'commission_volume', 'volume', 'shop_type'].join ','
+    params[:fields] = ['item_imgs', 'num_iid', 'seller_id', 'nick', 'title', 'price', 'item_location', 'seller_credit_score', 'click_url', 'shop_click_url', 'pic_url', 'taobaoke_cat_click_url', 'keyword_click_url', 'coupon_rate', 'coupon_price', 'coupon_start_time', 'coupon_end_time', 'commission_rate', 'commission', 'commission_num', 'commission_volume', 'volume', 'shop_type'].join ','
     params[:cid] = cid
     params[:keyword] = ''
     params[:sort] = 'volume_desc'

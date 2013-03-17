@@ -1,17 +1,3 @@
+- cnt = 2
 - @sub.each do |s|
-  %li{:style => 'width:195px;margin:0 15px;padding:5px;display:block;'}
-    %a{:style => 'border:none;width:195px;', :href => "/go/product/#{s.id}"}
-      %img.img-rounded{:src => "#{s.pic_url}", :alt => "#{s.title}", :style => 'width:195px;height:195px;'}
-    %small.pull-right{:style => 'margin:5px 0 0 25px;width:195px;'}
-      %a{:href => "/go/product/#{s.id}", :target => '_blank'}= s.title
-    %h6.pull-left{:style => 'color:red;padding-right:3px;'}= "￥#{s.coupon_price}"
-    %h6.pull-left{:style => 'color:#333;text-decoration:line-through;'}= "￥#{s.price} "
-    %h4.pull-right
-      %a{:href => "/go/shop/#{s.id}", :target => '_blank'}
-        %i.icon-home
-    %h4.pull-right
-      %a.star{:href => 'javascript:void(0)', :style => 'color:orangered;'}
-        %i.icon-star-empty
-    %h4.pull-right
-      %a{:href => "/go/product/#{s.id}", :style => 'color:#46a546', :target => '_blank'}
-        %i.icon-shopping-cart
+  = render :partial => 'shared/product', :locals => {:p => s}

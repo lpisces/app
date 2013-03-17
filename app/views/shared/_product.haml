@@ -1,0 +1,16 @@
+%li{:style => 'width:195px;height:310px;margin:0 5px;padding:5px;display:block;'}
+  %a.fancybox{:target => '_blank', :style => 'border:none;width:195px;', :href => "#{p.pic_url}"}
+    %img.img-rounded.lazy{:'src' => '', :'data-original' => "#{p.pic_url}_220x220.jpg", :alt => "#{p.title}", :style => 'width:195px;height:195px;'}
+  %small.pull-right{:style => 'margin:5px 0 0 25px;width:195px;'}
+    %a{:href => "/go/product/#{p.id}", :target => '_blank'}= p.title
+  %h6.pull-left{:style => 'color:red;padding-right:3px;'}= "￥#{p.coupon_price}"
+  %h6.pull-left{:style => 'color:#333;text-decoration:line-through;'}= "￥#{p.price} "
+  %h4.pull-right
+    %a{:href => "/go/product/#{p.id}", :target => '_blank'}
+      %i.icon-home
+  %h4.pull-right
+    %a{:href => 'javascript:void(0)', :style => 'color:orangered;'}
+      %i.icon-star-empty
+  %h4.pull-right
+    %a{:href => "/go/product/#{p.id}", :style => 'color:#46a546'}
+      %i.icon-shopping-cart

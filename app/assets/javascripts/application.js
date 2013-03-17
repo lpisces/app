@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery.lazyload.min
+//= require fancybox
 //= require jquery_ujs
 //= require twitter/bootstrap
 
 //= require_tree .
+$("img.lazy").lazyload();
+$("a.fancybox").fancybox();

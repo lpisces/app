@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314063153) do
+ActiveRecord::Schema.define(:version => 20130317104513) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20130314063153) do
     t.datetime "updated_at",                                                        :null => false
     t.integer  "sort",                                            :default => 0
     t.boolean  "enabled",                                         :default => true
+    t.text     "imgs"
   end
 
   create_table "settings", :force => true do |t|
