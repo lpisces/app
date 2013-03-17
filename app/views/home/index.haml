@@ -6,12 +6,12 @@
         = render :partial => 'top'
       = render :partial => 'sub'
   
-  .span2
+  .span2{:style => 'margin:0px;'}
     %span.label.label-info 美食分类
     %ul.nav.nav-tabs.nav-stacked
       - @categories.each do |c|
         %li
-          %a{:href => "/category/#{c.id}"}= "<i class='icon-bookmark'></i>#{c.name}".html_safe
+          %a{:href => "/category/#{c.id}"}= "<i class='icon-bookmark'></i><small>#{c.name}</small>".html_safe
 
 - @categories.each do |c|
   = render :partial => 'category', :locals => {:c => c}

@@ -48,6 +48,7 @@ namespace :taobao do
       next if TaobaoCategory.where(:cid => c.id).first.nil?
       params = product_params app_key, app_secret, c.id
       json = get(url(params))
+p json
       products = ActiveSupport::JSON.decode(json)
       next if products.nil? || products['taobaoke_items_coupon_get_response'].nil? || products['taobaoke_items_coupon_get_response']['taobaoke_items'].nil?
       items = products['taobaoke_items_coupon_get_response']['taobaoke_items']['taobaoke_item']
@@ -86,6 +87,7 @@ namespace :taobao do
     info['json'] = ActiveSupport::JSON.encode(p)
     info['imgs'] = p['imgs'].join(',')
     product = m.where(:title => info['title']).first_or_create(info)
+p product
     product.update_attributes(info)
   end
 

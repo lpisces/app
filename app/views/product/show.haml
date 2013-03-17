@@ -1,0 +1,46 @@
+- content_for :title do
+  = @product.title
+
+- category = Category.find_by_id(@product.category_id)
+.span12
+  %ul.breadcrumb{:style => 'margin:-20px 0 0 0px;'}
+    %li
+      %a{:href => '/'} 首页
+      %span.divider /
+    %li
+      %a{:href => category_map_path} 分类导航
+      %span.divider /
+    - if category.level == 1
+      %li
+        %a{:href => "/category/#{category.id}"}= category.name
+        %span.divider /
+    - else 
+      - parent = Category.find_by_id category.parent_id
+      %li
+        %a{:href => "/category/#{parent.id}"}= parent.name
+        %span.divider /
+      %li
+        %a{:href => "/category/#{category.id}"}= category.name
+        %span.divider /
+    %li.active= @product.title
+
+.span12
+  .span5.pull-left#slides{:style => 'margin-left:-20px;'}
+    - unless @product.imgs.nil?
+      - @product.imgs.split(',').each do |i|
+        %img.lazy.img-rounded{:src => i}
+  .span6.pull-left.thumbnail{:style => 'margin:10px 0 0 20px;'}
+    %h4.pull-left{:style => 'margin:5px'}
+      %a{:href => "/product/#{@product.id}", :target => '_blank'}= @product.title
+    .clear-fix{:style => 'clear:both;'}
+    %h4.pull-left{:style => 'color:red;padding:5px'}= "￥#{@product.coupon_price}"
+    %h4.pull-left{:style => 'color:#333;text-decoration:line-through;padding:5px;'}= "￥#{@product.price} "
+    %h4.pull-right{:style => 'padding:5px;'}
+      %a{:href => "/go/shop/#{@product.id}", :target => '_blank'}
+        %i.icon-home
+    %h4.pull-right{:style => 'padding:5px;'}
+      %a{:href => 'javascript:void(0)', :style => 'color:orangered;'}
+        %i.icon-star-empty
+    %h4.pull-right{:style => 'padding:5px;'}
+      %a{:href => "/go/product/#{@product.id}", :style => 'color:#46a546'}
+        %i.icon-shopping-cart

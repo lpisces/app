@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.slides.min
 //= require jquery.lazyload.min
 //= require fancybox
 //= require jquery_ujs
